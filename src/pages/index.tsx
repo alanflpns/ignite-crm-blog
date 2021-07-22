@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import br from 'date-fns/locale/pt-BR';
 import { useState } from 'react';
 import { FiCalendar, FiUser } from 'react-icons/fi';
+import Head from 'next/head';
 
 import { getPrismicClient } from '../services/prismic';
 import commonStyles from '../styles/common.module.scss';
@@ -45,11 +46,7 @@ export default function Home({ postsPagination }: HomeProps) {
       const newPosts = resJson.results.map(post => {
         return {
           uid: post.uid,
-          first_publication_date: format(
-            new Date(post.first_publication_date),
-            'dd MMM yyyy',
-            { locale: br }
-          ),
+          first_publication_date: post.first_publication_date,
           data: {
             title: post.data.title,
             subtitle: post.data.subtitle,
@@ -63,30 +60,36 @@ export default function Home({ postsPagination }: HomeProps) {
         results: newPosts,
       };
 
-      console.log(payload.results);
-
       setPosts([...posts, ...payload.results]);
       setUrlNextPage(payload.next_page);
     } catch (err) {
       console.log(err.message);
     }
   }
-  console.log(posts);
 
   return (
     <>
+      <Head>
+        <title>space traveling</title>
+      </Head>
       <Header />
       <section className={`${commonStyles.paddingPage}`}>
         {posts?.map(post => (
           <div key={post.uid} className={styles.containerPost}>
-            <Link href={`/${post.uid}`}>
+            <Link href={`/post/${post.uid}`}>
               <h1>{post.data.title}</h1>
             </Link>
             <span>{post.data.subtitle}</span>
             <div className={styles.containerInfo}>
               <div className={styles.info}>
                 <FiCalendar />
-                <span>{post.first_publication_date}</span>
+                <span>
+                  {format(
+                    new Date(post.first_publication_date),
+                    'dd MMM yyyy',
+                    { locale: br }
+                  )}
+                </span>
               </div>
 
               <div className={styles.info}>
@@ -114,17 +117,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'post')],
-    { fetch: ['post.title', 'post.subtitle', 'post.author'], pageSize: 1 }
+    { fetch: ['post.title', 'post.subtitle', 'post.author'], pageSize: 2 }
   );
 
   const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        'dd MMM yyyy',
-        { locale: br }
-      ),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,

@@ -1,1 +1,31 @@
-// TODO
+.containerPost {
+  margin-top: 3.125rem;
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  .infoPost {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+
+    .info {
+      margin-right: 1.25rem;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 0.3125rem;
+      }
+    }
+  }
+
+  .contentPost {
+    margin: 4.6875rem 0;
+
+    h2 {
+      margin-bottom: 1.25rem;
+    }
+  }
+}
