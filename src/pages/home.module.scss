@@ -1,1 +1,39 @@
-// TODO
+.containerPost {
+  margin: 3rem 0;
+
+  h1 {
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  }
+
+  h1:hover {
+    text-decoration: underline;
+  }
+
+  .containerInfo {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+
+    .info {
+      display: flex;
+      margin-right: 1.5rem;
+
+      span {
+        margin-left: 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.containerButtonNextPage {
+  margin-top: 3.125rem;
+
+  button {
+    background: none;
+    border: none;
+    color: var(--pink-500);
+    font-size: 1.125rem;
+  }
+}

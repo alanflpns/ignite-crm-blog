@@ -1,7 +1,40 @@
+:root {
+  --white: #f8f8f8;
+  --black-500: #1a1d23;
+  --pink-500: #ff57b2;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-// TODO
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5% !important;
+  }
+}
+
+body {
+  background-color: var(--black-500);
+  color: var(--white);
+  padding: 0 6.25rem;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: Inter;
+}
+
+button {
+  cursor: pointer;
+}
